@@ -23,25 +23,25 @@
                     <form action="RegisterServlet" method="post" >
                         <div class="form-group">
                             <label for="isim" class="form-label">Kullanıcı Adı</label>
-                            <input name="kullanici_adi" type="text" class="form-control" id="isim" placeholder="Enter Here" aria-describedby="emailHelp">
+                            <input name="kullanici_adi" type="text" class="form-control" id="isim" placeholder="Kullanıcı adınız giriniz" aria-describedby="emailHelp">
                         </div>
 
                         <div class="form-group">
                             <label for="email" class="form-label">E-mail Adresi</label>
-                            <input name="email" type="email" class="form-control" id="email" placeholder="Enter Here" aria-describedby="emailHelp">
+                            <input name="email" type="email" class="form-control" id="email" placeholder="Email adresiniz giriniz" aria-describedby="emailHelp">
                         </div>
 
                         <div class="form-group">
                             <label for="sifre" class="form-label">Şifre</label>
-                            <input name="sifre" type="password" class="form-control" id="sifre" placeholder="Enter Here" aria-describedby="emailHelp">
+                            <input name="sifre" type="password" class="form-control" id="sifre" placeholder="Şifrenizi giriniz" aria-describedby="emailHelp">
                         </div>
                         <div class="form-group">
                             <label for="telefon" class="form-label">Telefon Numarası</label>
-                            <input  name="telefon" type="number" class="form-control" id="telefon" placeholder="Enter Here" aria-describedby="emailHelp">
+                            <input  name="telefon" type="number" class="form-control" id="telefon" placeholder="Telefon numaranızı giriniz" aria-describedby="emailHelp">
                         </div>
                         <div class="form-group">
                             <label for="adres" class="form-label">Adres</label>
-                            <textarea  name="adres" style="height: 200px" class="form-control" placeholder="Enter your address"></textarea>
+                            <textarea  name="adres" style="height: 200px" class="form-control" placeholder="Adresinizi giriniz"></textarea>
                         </div>
                         <div class="container text-center">
                             <button class="btn btn-outline-success">Kayıt Ol</button>
