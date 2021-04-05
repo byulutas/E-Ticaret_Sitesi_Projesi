@@ -27,9 +27,37 @@
         <div class="row mt-4">
             <!--col:12-->
             <div class="col-md-12 " >
-                <div class="card-columns">
-                   
-            </div>
+               <div class="card-columns">
+                    <!--Urunler-->
+                    <%
+                        for (Urun u : ulist) {
+                    %>
+                    
+                    <!--urun card-->
+                    <div class="card urun-card" >
+                        <div class="container text-center ">
+                            <img src="img/urunler/<%=u.getUrun_resmi()%>" style="max-height: 200px;max-width:100%; width:  " class="card-img-top mt-2" alt="...">
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title"><%= u.getUrun_adi()%></h5>
+                            <p class="card-text">
+                                <%= Helper.get50Words(u.getUrun_aciklama())%>
+                            </p>
+                        </div>
+                        <div class="card-footer mt-4 text-center">
+                            <button class="btn custom-bg text-white" onclick="sepete_ekle(<%= u.getUrun_id() %> , '<%= u.getUrun_adi()%>' , <%= u.getIndirimdenSonraFiyat()%>)"> Sepete ekle </button>
+                            <button class="btn btn-outline-success" >&#8378; <%= u.getIndirimdenSonraFiyat() %>/- <span class="text-secondary discount-label">&#8378; <%= u.getUrun_fiyati() %> % <%= u.getIndirim() %> indirim</span> </button>
+                        </div>    
+                    </div>
+                 
+                </div> 
+                    <%}
+                        if(ulist.size()==0){
+                            out.println("Bu kategoride öğe yok");
+                        }
+                    %>
+                </div>
         </div>
     </div>
 </div>
