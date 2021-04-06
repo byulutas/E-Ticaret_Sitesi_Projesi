@@ -19,6 +19,38 @@
     <%@include file="components/navbar.jsp" %>
     <div class="container-fluid">    
     <div class="row mt-3">
+        <%         
+            String kat=null;
+            kat =request.getParameter("kategori");
+            UrunDao udao = new UrunDao(FactoryProvider.getFactory());
+            List<Urun> ulist=udao.getAllUrun();
+             if(kat==null){
+                ulist = udao.getAllUrun();
+             }else if( kat==null || kat.trim().equals("all")){
+                ulist = udao.getAllUrun();
+            }else{
+                 int kid=Integer.parseInt(kat.trim());
+                 udao.getAllUrunById(kid);
+            }
+            
+            KategoriDao cdao = new KategoriDao(FactoryProvider.getFactory());
+            List<Kategori> klist = cdao.getCategories();
+        %>
+
+    <!--kategorileri göster*-->
+    <div class="col-md-2">
+        <div class="list-group mt-4">
+            <a href="index.jsp?kategori=all" class="list-group-item  list-group-item active" aria-current="true">
+                Tüm ürünler
+            </a>
+            <%for (Kategori k : klist) {
+            %>
+
+            <a href="index.jsp?kategori=<%= k.getKategori_id() %>" class="list-group-item list-group-item-action"><%= k.getKategori_baslik()%></a>
+
+            <%}%>
+        </div>
+    </div>
 
     <!--ürünleri göster-->
     <div class="col-md-8">
