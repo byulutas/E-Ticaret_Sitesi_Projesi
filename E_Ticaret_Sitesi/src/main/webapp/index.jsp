@@ -78,7 +78,7 @@
                             </p>
                         </div>
                         <div class="card-footer mt-4 text-center">
-                            <button class="btn custom-bg text-white" onclick="sepete_ekle(<%= u.getUrun_id() %> , '<%= u.getUrun_adi()%>' , <%= u.getIndirimdenSonraFiyat()%>)"> Sepete ekle </button>
+                            <button class="btn custom-bg text-white" onclick=""> Sepete ekle </button>
                             <button class="btn btn-outline-success" >&#8378; <%= u.getIndirimdenSonraFiyat() %>/- <span class="text-secondary discount-label">&#8378; <%= u.getUrun_fiyati() %> % <%= u.getIndirim() %> indirim</span> </button>
                         </div>    
                     </div>
