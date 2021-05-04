@@ -1,9 +1,28 @@
+<%@page import="com.mycompany.e_ticaret_sitesi.entities.Kategori"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.dao.KategoriDao"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.entities.Urun"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.helper.FactoryProvider"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.dao.UrunDao"%>
+<%@page import="java.util.List"%>
 <%@page import="com.mycompany.e_ticaret_sitesi.entities.Kullanici"%>
 <%
     Kullanici kullanici1 = (Kullanici) session.getAttribute("current-user");
 
 %>
-
+<%    String kategori = request.getParameter("kategori");
+    UrunDao urundao = new UrunDao(FactoryProvider.getFactory());
+    List<Urun> urunlist = urundao.getAllUrun();
+    if (kategori == null) {
+        urunlist = urundao.getAllUrun();
+    } else if (kategori == null || kategori.trim().equals("all")) {
+        urunlist = urundao.getAllUrun();
+    } else {
+        int kid = Integer.parseInt(kategori.trim());
+        urunlist = urundao.getAllUrunById(kid);
+    }
+    KategoriDao kategoridao = new KategoriDao(FactoryProvider.getFactory());
+    List<Kategori> kategorilist = kategoridao.getCategories();
+%>
 <nav class="navbar navbar-expand-lg navbar-dark custom-bg">
     <div class="container" >
         <div class="container-fluid">
@@ -24,10 +43,11 @@
                             Kategoriler
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <%for (Kategori k : kategorilist) {
+                            %>
+                            <li><a href="index.jsp?kategori= <%= k.getKategori_id()%>" class="dropdown-item" href="#"><%= k.getKategori_baslik()%></a></li>
+
+                            <%}%>
                         </ul>
                     </li>
 
