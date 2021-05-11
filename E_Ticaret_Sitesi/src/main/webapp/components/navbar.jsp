@@ -1,9 +1,9 @@
-<%@page import="com.mycompany.e_ticaret_sitesi.entities.Kategori"%>
-<%@page import="com.mycompany.e_ticaret_sitesi.dao.KategoriDao"%>
 <%@page import="com.mycompany.e_ticaret_sitesi.entities.Urun"%>
-<%@page import="com.mycompany.e_ticaret_sitesi.helper.FactoryProvider"%>
 <%@page import="com.mycompany.e_ticaret_sitesi.dao.UrunDao"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.entities.Kategori"%>
 <%@page import="java.util.List"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.dao.KategoriDao"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.helper.FactoryProvider"%>
 <%@page import="com.mycompany.e_ticaret_sitesi.entities.Kullanici"%>
 <%
     Kullanici kullanici1 = (Kullanici) session.getAttribute("current-user");
@@ -26,7 +26,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark custom-bg">
     <div class="container" >
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.jsp">WebMarket</a>
+            <div class="col-xs-2 col-md-2 main-logo">
+                <a href="index.jsp"><img src="img\logo.png" alt="logo" class="logo img-responsive"></a>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -50,11 +52,17 @@
                             <%}%>
                         </ul>
                     </li>
-
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <%                        if (kullanici1 == null) {
+                    <%
+                        if (kullanici1 == null) {
                     %> 
+                    <header id="header" class="header">
+                        <div class="iconShopping" >
+                            <i class="fa fa-shopping-cart"></i>
+                            <p>0</p>
+                        </div>
+                    </header>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="login.jsp">Oturum Aç</a>
                     </li>
@@ -69,12 +77,14 @@
                         <a class="nav-link active" aria-current="page" href="#!"><%=kullanici1.getKullanici_adi()%></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="LogoutServlet">Ç?k?? Yap</a>
+                        <a class="nav-link active" aria-current="page" href="LogoutServlet">Çikis Yap</a>
                     </li>
+
                     <%    }
 
                     %>
                 </ul>
+
             </div>
         </div>
 
