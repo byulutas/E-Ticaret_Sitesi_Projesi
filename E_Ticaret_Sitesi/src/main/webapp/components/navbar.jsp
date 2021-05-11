@@ -73,6 +73,12 @@
                     } else {
 
                     %>
+                    <header id="header" class="header">
+                        <div class="iconShopping" >
+                            <i class="fa fa-shopping-cart"></i>
+                            <p>0</p>
+                        </div>
+                    </header>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#!"><%=kullanici1.getKullanici_adi()%></a>
                     </li>
