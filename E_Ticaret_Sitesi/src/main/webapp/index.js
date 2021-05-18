@@ -78,3 +78,7 @@ window.onload = function () {
 function goToCheckout(){
     window.location="checkout.jsp"
 }
+
+function goToNormal(){
+    window.location="normal.jsp"
+}

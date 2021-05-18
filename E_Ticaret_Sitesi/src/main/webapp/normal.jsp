@@ -1,11 +1,9 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.mycompany.e_ticaret_sitesi.helper.Helper"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.dao.UrunDao"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.entities.Urun"%>
+<%@page import="java.util.List"%>
 <%@page import="com.mycompany.e_ticaret_sitesi.dao.KategoriDao"%>
 <%@page import="com.mycompany.e_ticaret_sitesi.entities.Kategori"%>
-<%@page import="java.util.List"%>
-<%@page import="com.mycompany.e_ticaret_sitesi.entities.Urun"%>
-<%@page import="com.mycompany.e_ticaret_sitesi.dao.UrunDao"%>
-<%@page import="com.mycompany.e_ticaret_sitesi.helper.FactoryProvider" %>
+<%@page import="com.mycompany.e_ticaret_sitesi.helper.FactoryProvider"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,6 +13,7 @@
     <title>
         Web Market
     </title>
+    <title>www.cinki.com</title>
     <style type="text/css">
         #div1  {float: left;
                 background: #edeaea;
@@ -37,7 +36,8 @@
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <%@include file="components/common_css_js.jsp" %>
     <%
-        String kat = request.getParameter("kategori");
+        String kat = null;
+        kat = request.getParameter("kategori");
         UrunDao udao = new UrunDao(FactoryProvider.getFactory());
         List<Urun> ulist = udao.getAllUrun();
         if (kat == null) {
@@ -46,7 +46,7 @@
             ulist = udao.getAllUrun();
         } else {
             int kid = Integer.parseInt(kat.trim());
-            ulist = udao.getAllUrunById(kid);
+            udao.getAllUrunById(kid);
         }
 
         KategoriDao cdao = new KategoriDao(FactoryProvider.getFactory());
@@ -70,7 +70,7 @@
     </script>
 </head>
 <body>
- <div class="main">
+<div class="main">
     <%@include file="components/navbar.jsp" %>
     <!--kategorileri göster*-->
     <div class="col-md-12">
@@ -83,7 +83,7 @@
                 <%for (Kategori k : klist) {
                 %>
 
-                <a href="index.jsp?kategori= <%= k.getKategori_id()%>" class="list-group-item list-group-item-action"><%= k.getKategori_baslik()%></a>
+                <a href="index.jsp?kategori=<%= k.getKategori_id()%>" class="list-group-item list-group-item-action"><%= k.getKategori_baslik()%></a>
 
                 <%}%>
             </div>
@@ -92,20 +92,18 @@
             <%            for (Urun u : ulist) {
             %>
             <div class="item col-md-3">
-                <input type="hidden" name="urun_id" value="<%= u.getUrun_id()%>">
-                    <img src="img/urunler/<%=u.getUrun_resmi()%>" alt=""/>
-                    <div class="itemInfo">
-                        <h1><%= u.getUrun_adi()%></h1>
-                        <p>&#8378;<span><%= u.getUrun_fiyati()%></span></p>
-                        <a href="urun/urundetay.jsp?urun_id= <%= u.getUrun_id()%>">Incele </a>
-                        <a href="#" title="add to cart" class="attToCart">Sepete Ekle</a>
-                    </div>
-
+                <img src="img/urunler/<%=u.getUrun_resmi()%>" alt=""/>
+                <div class="itemInfo">
+                    <h1><%= u.getUrun_adi()%></h1>
+                    <p>&#8378;<span><%= u.getUrun_fiyati()%></span></p>
+                    <a href="urun/urundetay.jsp?urun_id= <%= u.getUrun_id()%>">Incele </a>
+                    <a href="#" title="add to cart" class="attToCart">Sepete Ekle</a>
+                </div>
             </div>
 
             <%}
                 if (ulist.size() == 0) {
-                    out.println("Bu kategoride öge yok");
+                    out.println("Bu kategoride ö?e yok");
                 }
             %>
         </div>
@@ -125,5 +123,6 @@
 
 <!-- script -->
 <script src="index.js"></script>
-<script src="js/script.js"></script></body>
+<script src="js/script.js"></script>
+</body>
 </html>

@@ -1,13 +1,38 @@
-
+<%@page import="com.mycompany.e_ticaret_sitesi.entities.Urun"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.dao.UrunDao"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.dao.KullaniciDao"%>
+<%@page import="java.util.Map"%>
+<%@page import="com.mycompany.e_ticaret_sitesi.helper.Helper"%>
 <%@page import="java.util.List"%>
 <%@page import="com.mycompany.e_ticaret_sitesi.entities.Kategori"%>
 <%@page import="com.mycompany.e_ticaret_sitesi.dao.KategoriDao"%>
 <%@page import="com.mycompany.e_ticaret_sitesi.helper.FactoryProvider"%>
 <%@page import="jdk.nashorn.internal.runtime.regexp.JoniRegExp"%>
 <%@page import="com.mycompany.e_ticaret_sitesi.entities.Kullanici"%>
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Kullanici kullanici=(Kullanici)session.getAttribute("current-user");
+    if(kullanici==null){
+        session.setAttribute("message","Giriş yapmadınız !! Önce oturum açın");
+        response.sendRedirect("login.jsp");
+        return;
+    }else{
+        if(kullanici.getKullanici_tipi().equals("normal")){
+            session.setAttribute("message","Yönetici değilsin !!Bu sayfaya erişemezsin");
+            response.sendRedirect("login.jsp");
+            return;
+        }
+    }
+%>
+<%
+    KategoriDao kdao = new KategoriDao(FactoryProvider.getFactory());
+    KullaniciDao kullanicidao = new KullaniciDao(FactoryProvider.getFactory());
+    UrunDao udao = new UrunDao(FactoryProvider.getFactory());
+    List<Kategori> list = kdao.getCategories();
+    List<Kullanici> kulist = kullanicidao.getAllKullanici();
+    List<Urun> ulist = udao.getAllUrun();    
+    
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,8 +55,9 @@
                     <div class="container">
                         <img style="max-width: 125px;" class="img-fluid rounded-circle" src="img/team.png" alt="kullanici_icon"> 
                     </div>
-                    <h1>23442</h1>
+                    <h1><%= kulist.size() %></h1>
                     <h1 class="text-uppercase text-muted">Kullanıcılar</h1>
+                    <a href="admin/kullanicilist.jsp">Detaylı İncelemek İçin Tıklayınız.</a>
 
                 </div>
 
@@ -46,8 +72,9 @@
                     <div class="container">
                         <img style="max-width: 125px;" class="img-fluid rounded-circle" src="img/liste.png" alt="kategori_icon"> 
                     </div>
-                    <h1>2343</h1>
+                    <h1><%= list.size() %></h1>
                     <h1 class="text-uppercase text-muted">Kategoriler</h1>
+                    <a href="admin/kategorilist.jsp">Detaylı İncelemek İçin Tıklayınız.</a>
 
                 </div>
 
@@ -59,12 +86,13 @@
         <div class="col-md-4">
             <!--ücüncü box-->
             <div class="card">
-                <div class="card-body text-center">
+                <div class="card-body text-center"> 
                     <div class="container">
                         <img style="max-width: 125px;" class="img-fluid rounded-circle" src="img/urun.png" alt="urun_icon"> 
                     </div>
-                    <h1>234</h1>
-                    <h1 class="text-uppercase text-muted">Ürünler</h1>
+                    <h1><%= ulist.size() %></h1>
+                    <h1 class="text-uppercase text-muted" >Ürünler</h1>
+                    <a href="admin/urunlist.jsp">Detaylı İncelemek İçin Tıklayınız.</a>
 
                 </div>
 
@@ -185,14 +213,10 @@
                             <input type="number" class="form-control" placeholder="Ürün adetini giriniz" name="urun_adeti" required />                                    
                         </div>  
                         <!--urun kategori-->
-                        <%                            
-                            KategoriDao kdao = new KategoriDao(FactoryProvider.getFactory());
-                            List<Kategori> list = kdao.getCategories();
-                        %>
+
                         <div class="form-group mt-3">
                             <select name="kategori_id" class="form-control" id="">
-                                <%
-                                for (Kategori k : list) {
+                                <%                                    for (Kategori k : list) {
                                 %>
                                 <option value="<%=k.getKategori_id()%>"><%=k.getKategori_baslik()%></option>
                                 <%}%>
