@@ -148,7 +148,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header custom-bg text-white" >
-                <h5 class="modal-title" id="staticBackdropLabel">Kategori detayını doldurunuz</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Kategori Detaylarını Doldurunuz</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -182,8 +182,8 @@
 <div class="modal" id="add-product-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Ürün Detayları</h5>
+            <div class="modal-header custom-bg text-white">
+                <h5 class="modal-title" id="staticBackdropLabel">Ürün Detaylarını Doldurunuz</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
