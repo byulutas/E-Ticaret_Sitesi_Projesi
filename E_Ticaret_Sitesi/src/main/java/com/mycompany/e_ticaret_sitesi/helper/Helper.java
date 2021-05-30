@@ -1,6 +1,4 @@
-
 package com.mycompany.e_ticaret_sitesi.helper;
-
 
 public class Helper {
     public static String get50Words(String acıklama)

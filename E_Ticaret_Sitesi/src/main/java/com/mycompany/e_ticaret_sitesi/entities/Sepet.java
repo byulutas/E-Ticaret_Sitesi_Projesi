@@ -1,4 +1,3 @@
-
 package com.mycompany.e_ticaret_sitesi.entities;
 
 import javax.persistence.Column;
